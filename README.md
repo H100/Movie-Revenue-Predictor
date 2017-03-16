@@ -1,4 +1,4 @@
-# Movie-Revenue-Predictor
+# Movie-Revenue-And-Rating-Predictor
 We are making an app for predicting imdb rating for a new movie before its release. This app can be used by movie producers to choose directors, actors, etc. for their coming movies based on the prediction by the app.
 
 We will be prediciting the rating by following two approaches :
