@@ -268,7 +268,7 @@ regr = linear_model.LinearRegression()
 
 # Train the model using the training sets
 y_lin = regr.fit(X_train_rate, Y_train_rate).predict(X_test_rate)
-print(np.mean(abs(y_lin-Y_test_rate)))
+print(np.mean(abs(y_lin-Y_test_rate)**2)**0.5)
 
 np.savetxt("rating_linear.csv", y_lin, delimiter=",",fmt='%.1e')
 print("LR is over")
@@ -279,23 +279,22 @@ svr_rbf = SVR(kernel='rbf', C=0.1, gamma=0.2)
 #svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 
 y_rbf = svr_rbf.fit(X_train_rate, Y_train_rate).predict(X_test_rate)
-print(np.mean(abs(y_rbf-Y_test_rate)))
+print(np.mean(abs(y_rbf-Y_test_rate)**2)**0.5)
 np.savetxt("rating_rbf.csv", y_rbf, delimiter=",",fmt='%.1e')
 print("RBF is over")
 
 
 
-
 krr = KernelRidge(alpha=0.1)
 y_krr = krr.fit(X_train_rate, Y_train_rate).predict(X_test_rate)
-print(np.mean(abs(y_krr-Y_test_rate)**2))
+print(np.mean(abs(y_krr-Y_test_rate)**2)**0.5)
 np.savetxt("rating_krr.csv", y_krr, delimiter=",",fmt='%.1e')
 print("KRR is over")
 
 
 lasso = linear_model.Lasso(alpha=0.1)
 y_lasso = lasso.fit(X_train_rate, Y_train_rate).predict(X_test_rate)
-print(np.mean(abs(y_lasso-Y_test_rate)**2))
+print(np.mean(abs(y_lasso-Y_test_rate)**2)**0.5)
 np.savetxt("rating_lasso.csv", y_lasso, delimiter=",",fmt='%.1e')
 print("LASSO is over")
 #==================================================================REVENUE====================================================================
@@ -313,7 +312,7 @@ regr = linear_model.LinearRegression()
 # Train the model using the training sets
 y_lin = regr.fit(X_train_rev, Y_train_rev).predict(X_test_rev)
 
-print(np.mean((y_lin-Y_test_rev)**2))
+print(np.mean(abs(y_lin-Y_test_rev)**2)**0.5)
 
 np.savetxt("revenue_linear.csv", y_lin, delimiter=",")
 print("LR is over")
@@ -325,21 +324,21 @@ svr_lin = SVR(kernel='linear', C=1e3)
 #svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 
 y_rbf_rev = svr_rbf_rev.fit(X_train_rev, Y_train_rev).predict(X_test_rev)
-print(np.mean((y_rbf_rev-Y_test_rev)**2))
+print(np.mean(abs(y_rbf_rev-Y_test_rev)**2)**0.5)
 np.savetxt("revenue_rbf.csv", y_rbf_rev, delimiter=",")
 print("RBF is over")
 
 
 krr = KernelRidge(alpha=0.1)
 y_krr = krr.fit(X_train_rev, Y_train_rev).predict(X_test_rev)
-print(np.mean(abs(y_krr-Y_test_rev)))
+print(np.mean(abs(y_krr-Y_test_rev)**2)**0.5)
 np.savetxt("revenue_krr.csv",y_krr , delimiter=",")
 print("KRR is over")
 
 
 lasso = linear_model.Lasso(alpha=0.1)
 y_lasso = lasso.fit(X_train_rev, Y_train_rev).predict(X_test_rev)
-print(np.mean(abs(y_lasso-Y_test_rev)))
+print(np.mean(abs(y_lasso-Y_test_rev)**2)**0.5)
 np.savetxt("revenue_lasso.csv", y_lasso, delimiter=",",fmt='%.1e')
 print("LASSO is over")
 
@@ -367,6 +366,9 @@ plt.show()
 """
 
 #==============================================================CLASSIFICATION==================================================================
+
+#=================================================================RATING=======================================================================
+
 # svm classification
 """
 lab_enc = preprocessing.LabelEncoder()
@@ -396,5 +398,4 @@ print(metrics.classification_report(Y_test_rate.astype('int'), y_predicted))
 
 print("Confusion matrix")
 print(metrics.confusion_matrix(Y_test_rate.astype('int'), y_predicted))
-
 
