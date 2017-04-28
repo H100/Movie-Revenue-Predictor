@@ -367,14 +367,14 @@ print("LASSO is over")
 #=================================================================RATING=======================================================================
 
 # svm classification
-clf = svm.SVC(kernel='rbf', gamma=0.7, C = 1.0).fit(X_train_rate, Y_train_rate)
+clf = svm.SVC(kernel='rbf', gamma=0.7, C = 1.0).fit(X_train_rate, Y_train_rate.astype('int'))
 y_predicted = clf.predict(X_test_rate)
 
 # performance
 print("SVM")
 print("Classification report")
 
-print(metrics.classification_report(Y_test_rate, y_predicted))
+print(metrics.classification_report(Y_test_rate.astype('int'), y_predicted))
 
 #print("Confusion matrix")
 #print(metrics.confusion_matrix(Y_test_rate.astype('int'), y_predicted))
@@ -423,5 +423,16 @@ print(metrics.classification_report(Y_test_rate.astype('int'), y_predicted))
 
 #print("Confusion matrix")
 #print(metrics.confusion_matrix(Y_test_rate.astype('int'), y_predicted))
+
+#Random Forest
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train_rate, Y_train_rate.astype('int'))
+y_predicted = model.predict(X_test_rate)
+
+# performance
+print("KNN")
+print("Classification report")
+
+print(metrics.classification_report(Y_test_rate.astype('int'), y_predicted))
 
 
