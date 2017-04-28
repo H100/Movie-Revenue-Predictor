@@ -22,6 +22,7 @@ from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 
 
